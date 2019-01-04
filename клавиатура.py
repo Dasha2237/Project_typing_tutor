@@ -22,6 +22,7 @@ class MyWidget(QMainWindow,Ui_MainWindow):
         self.chb = [self.text1, self.symbol]
         self.go.clicked.connect(self.Exersize)
         self.restart.clicked.connect(self.Restart)
+        self.lentext = 0
         self.t = 'qwertyuiopasdfghjkl;\][zxcvbnm,./1234567890-=+_)(*&^%$}{|:?><йцукенгшщзхъфывапролджэячсмитьбю'
         self.keybuttons = [self.btn_io, self.btn_1, self.btn_2, self.btn_3, self.btn_4, self.btn_5,
                            self.btn_6, self.btn_7, self.btn_8, self.btn_9, self.btn_0, self.btn_minus,
@@ -109,6 +110,7 @@ class MyWidget(QMainWindow,Ui_MainWindow):
                     if i!= 38:
                         self.keybuttons[i].setText(str(self.rus[i]))
         self.RU.setChecked(True)
+        self.lentext = 0
         self.text = ''
         self.data = ''
         self.clr = -1
@@ -120,6 +122,7 @@ class MyWidget(QMainWindow,Ui_MainWindow):
         if (event.type() == QEvent.KeyPress) and (event.key() == Qt.Key_Space):
             print(foo)'''
     def keyPressEvent(self, event):
+        self.setFocus()
         if self.clr != -1:
             if self.clr in [0,14,26,27,40,51,11,12,13,23,24,25,36,37,38,39,50]:
                 self.keybuttons[self.clr].setStyleSheet("""  QPushButton:!hover { background-color: rgb(255, 255, 127) } """)
@@ -137,9 +140,13 @@ class MyWidget(QMainWindow,Ui_MainWindow):
                 self.keybuttons[self.clr].setStyleSheet("""  QPushButton:!hover { background-color: rgb(85, 170, 127) } """)
         if self.b != -1:
             self.keybuttons[40].setStyleSheet("""  QPushButton:!hover { background-color: rgb(255, 255, 127) } """)
-        if len(self.text) % 151 == 0:
+        self.lentext += 1
+        if self.lentext == 90:
+            self.lentext = 1
             self.text = self.text + '\n'
             self.answershit.setText(self.text)
+        elif event.nativeScanCode() == 28:
+            self.lentext = 0
         if int(event.modifiers()) == (QtCore.Qt.ShiftModifier + QtCore.Qt.ControlModifier):
             self.b = 1
             self.clr = 51
@@ -1156,10 +1163,15 @@ class MyWidget(QMainWindow,Ui_MainWindow):
                 self.btn_capslock.setStyleSheet("""QPushButton:!hover { color: rgb(255, 0, 0); }""")
             self.clr = 26
         elif event.key() == Qt.Key_Backspace:
+            a = self.text.split('\n')
+            print(a)
+            if a[-1] == '':
+                self.lentext = len(a[-2])
+                print('dkvhsdk', len(a[-2]))
             self.text = self.text[:-1]
             self.answershit.setText(self.text)
             self.btn_backspace.setStyleSheet("""QPushButton:!hover { background-color: rgb(255, 255, 255); }""")
-            self.clr = 13 
+            self.clr = 13
         elif event.nativeScanCode() == 41:
             if self.lng == 'RU':
                 if self.capslock == 0:
@@ -1301,7 +1313,7 @@ class MyWidget(QMainWindow,Ui_MainWindow):
             self.answershit.setText(self.text)
             self.btn_space.setStyleSheet("""QPushButton:!hover { background-color: rgb(255, 255, 255); }""")
             self.clr = 53
-
+        print(self.lentext)
             
 app = QApplication(sys.argv)
 ex = MyWidget()

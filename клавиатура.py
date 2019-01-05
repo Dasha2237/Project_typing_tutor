@@ -7,7 +7,7 @@ from PyQt5.QtCore import Qt
 from project_one import Ui_MainWindow
 
 
-class MyWidget(QMainWindow,Ui_MainWindow):
+class MyWidget(QMainWindow, Ui_MainWindow):
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -17,28 +17,47 @@ class MyWidget(QMainWindow,Ui_MainWindow):
         self.lng = 'RU'
         self.b = -1
         self.capslock = 0
+        self.testplace.setHtml('Выберите задание')
         self.button_group.buttonClicked.connect(self.Language)
         self.texts = ['1.txt', '2.txt', '3.txt', '4.txt', '5.txt']
         self.chb = [self.text1, self.symbol]
         self.go.clicked.connect(self.Exersize)
         self.restart.clicked.connect(self.Restart)
         self.lentext = 0
-        self.t = 'qwertyuiopasdfghjkl;\][zxcvbnm,./1234567890-=+_)(*&^%$}{|:?><йцукенгшщзхъфывапролджэячсмитьбю'
-        self.keybuttons = [self.btn_io, self.btn_1, self.btn_2, self.btn_3, self.btn_4, self.btn_5,
-                           self.btn_6, self.btn_7, self.btn_8, self.btn_9, self.btn_0, self.btn_minus,
-                           self.btn_plus, self.btn_backspace, self.btn_q, self.btn_w, self.btn_e, self.btn_r,
-                           self.btn_t, self.btn_y, self.btn_u, self.btn_i, self.btn_o, self.btn_p,
-                           self.btn_xa, self.btn_tv_zn, self.btn_capslock, self.btn_a, self.btn_s, self.btn_d,
-                           self.btn_f, self.btn_g, self.btn_h, self.btn_j, self.btn_k, self.btn_l,
-                           self.btn_gh, self.btn_ei,'c', self.btn_enter, self.btn_shift, self.btn_z,
-                           self.btn_x, self.btn_c, self.btn_v, self.btn_b, self.btn_n, self.btn_m,
-                           self.btn_be, self.btn_iu, self.btn_dot, self.btn_ctrl, self.btn_alt, self.btn_space]
-        self.rus = ['ё','1 !','2 "','3 №','4 ;','5 %','6 :','7 ?','8 *','9 (','0 )','- _','= +','<- Backspace','й','ц','у','к','е','н','г','ш',
-                    'щ','з','х','ъ','Caps Lock','ф','ы','в','а','п','р','о','л','д','ж','э','g','Enter','Shift','я','ч','с',
-                    'м','и','т','ь','б','ю','. ,','Ctrl','Alt','                                     ']
-        self.eng = ['` ~','1 !','2 @','3 #','4 $','5 %','6 ^','7 &','8 *','9 (','0 )','- _','= +','<- Backspace','q','w','e','r','t','y','u','i',
-                    'o','p','[ {',']}','Caps Lock','a','s','d','f','g','h','j','k','l','; :','""','g','Enter','Shift','z','x','c',
-                    'v','b','n','m',', <','. >','/ ?','Ctrl','Alt','                                     ']
+        self.t = 'qwertyuiopasdfghjkl;\][zxcvbnm,./1234567890-=+_)'
+        self.t += '(*&^%$}{|:?><йцукенгшщзхъфывапролджэячсмитьбю'
+        self.keybuttons = [self.btn_io, self.btn_1, self.btn_2, self.btn_3,
+                           self.btn_4, self.btn_5, self.btn_6, self.btn_7,
+                           self.btn_8, self.btn_9, self.btn_0, self.btn_minus,
+                           self.btn_plus, self.btn_backspace, self.btn_q,
+                           self.btn_w, self.btn_e, self.btn_r,
+                           self.btn_t, self.btn_y, self.btn_u,
+                           self.btn_i, self.btn_o, self.btn_p,
+                           self.btn_xa, self.btn_tv_zn, self.btn_capslock,
+                           self.btn_a, self.btn_s, self.btn_d,
+                           self.btn_f, self.btn_g, self.btn_h, self.btn_j,
+                           self.btn_k, self.btn_l,
+                           self.btn_gh, self.btn_ei, 'c', self.btn_enter,
+                           self.btn_shift, self.btn_z,
+                           self.btn_x, self.btn_c, self.btn_v, self.btn_b,
+                           self.btn_n, self.btn_m,
+                           self.btn_be, self.btn_iu, self.btn_dot,
+                           self.btn_ctrl, self.btn_alt, self.btn_space]
+        self.rus = ['ё', '1 !', '2 "', '3 №', '4 ;', '5 %', '6 :', '7 ?',
+                    '8 *', '9 (','0 )', '- _', '= +', '<- Backspace', 'й' ,
+                    'ц', 'у', 'к', 'е', 'н', 'г', 'ш',
+                    'щ', 'з', 'х', 'ъ', 'Caps Lock', 'ф', 'ы', 'в', 'а',
+                    'п', 'р', 'о', 'л', 'д', 'ж', 'э', 'g', 'Enter', 'Shift',
+                    'я', 'ч', 'с',
+                    'м', 'и', 'т', 'ь', 'б', 'ю', '. ,', 'Ctrl', 'Alt',
+                    '                                     ']
+        self.eng = ['` ~', '1 !', '2 @', '3 #', '4 $', '5 %', '6 ^', '7 &',
+                    '8 *', '9 (','0 )', '- _', '= +', '<- Backspace', 'q',
+                    'w', 'e', 'r', 't', 'y', 'u', 'i',
+                    'o','p','[ {',']}','Caps Lock','a','s','d','f','g','h',
+                    'j','k','l','; :','""','g','Enter','Shift','z','x','c',
+                    'v', 'b', 'n', 'm', ', <','. >', '/ ?', 'Ctrl', 'Alt',
+                    '                                     ']
         self.check.clicked.connect(self.Result)
         '''for i in range(len(self.keybuttons)):
             self.keybuttons[i].setText(str(self.eng[i]))'''
@@ -87,6 +106,7 @@ class MyWidget(QMainWindow,Ui_MainWindow):
                         self.keybuttons[i].setText(str(self.rus[i]))
                 self.lng = 'RU'
     def Restart(self):
+        self.testplace.setHtml('Выберите задание')
         if self.clr != -1:
             if self.clr in [0,14,26,27,40,51,11,12,13,23,24,25,36,37,38,39,50]:
                 self.keybuttons[self.clr].setStyleSheet("""  QPushButton:!hover { background-color: rgb(255, 255, 127) } """)
